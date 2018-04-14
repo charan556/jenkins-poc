@@ -10,8 +10,12 @@ RUN apt-get install -y openssh-server
 RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd
 RUN mkdir -p /var/run/sshd
 
+RUN apt-get update 
+
+RUN apt-get install -y iputils-ping RUN apt-get install -y net-tools RUN apt-get update && \ apt-get upgrade -y && \ apt-get install -y software-properties-common && \ add-apt-repository ppa:webupd8team/java -y && \ apt-get update && \ echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \ apt-get install -y oracle-java8-installer && \ apt-get clean
+
 # Install JDK 7 (latest edition)
-RUN apt-get install -y openjdk-7-jdk
+#RUN apt-get install -y openjdk-7-jdk
 
 # Add user jenkins to the image
 RUN adduser --quiet jenkins
